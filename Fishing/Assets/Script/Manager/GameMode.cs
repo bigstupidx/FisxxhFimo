@@ -171,6 +171,7 @@ public class GameMode : MonoBehaviour
         {
             if (i == randFishHoiSinh)
             {
+                Debug.Log("Hoi sinh fish");
                 //fish Die
                 GameObject fish = pair.Value;
                 fish.GetComponent<Move2>().isFreeze = false;
