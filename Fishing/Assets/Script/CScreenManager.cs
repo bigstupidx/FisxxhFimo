@@ -15,7 +15,7 @@ public class ScreenConfig
     public GameObject _objScreen;
     public eScreenType _type;
 }
-public class CScreenManager : MonoBehaviour {
+public class CScreenManager : MonoSingleton<CScreenManager> {
     public List<ScreenConfig> listScreen = new List<ScreenConfig>();
     private Dictionary<eScreenType, GameObject> dicScreen = new Dictionary<eScreenType, GameObject>();
 
