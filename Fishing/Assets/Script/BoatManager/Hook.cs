@@ -165,6 +165,10 @@ public class Hook : MonoBehaviour
             PlayerAnimator.SetBool("IsCatch", false);
             return;
         }
+        if (other.tag == "Explose")
+        {
+            Destroy(other.gameObject);
+        }
 
         if (other.tag == "Mouth")
         {

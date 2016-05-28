@@ -84,6 +84,7 @@ public class GameMode : MonoBehaviour
         if (timeGame <= 15)
         {
             catchFish = true;
+            GameObject.Find("Goal").GetComponent<Image>().sprite = Resources.Load<Sprite>("FishGoal");
         }
         GameObject.Find("TimeClock").GetComponent<Text>().text = ((int) timeGame).ToString();
     }

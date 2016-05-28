@@ -11,12 +11,16 @@ public class Pipe : Photon.MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	    delay = 20;
+	    delay = 25;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
+	    if (GameManager.Instance.gameMode.timeGame <= 15)
+	    {
+            return;
+	    }
 	    SpawnTrash();
 	}
 
@@ -28,7 +32,7 @@ public class Pipe : Photon.MonoBehaviour
         }
         else
         {
-            delay = 5;
+            delay = 8;
             anim.SetTrigger("startPipe");
         }
     }
