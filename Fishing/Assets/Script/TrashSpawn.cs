@@ -15,10 +15,9 @@ public class TrashSpawn : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	    delay = 0.5f;
+	    delay = 0.3f;
 	    trashList = new Dictionary<string, GameObject>();
 	    trashList = trash.ToDictionary(x => x.name, x => x);
-
 	}
 	
 	// Update is called once per frame
@@ -42,7 +41,7 @@ public class TrashSpawn : MonoBehaviour
                 int trashPointID = Random.Range(0, this.trashPoint.Count);
                 GameObject go = Instantiate(trash[trashID], trashPoint[trashPointID].transform.position, Quaternion.identity) as GameObject;
                 go.transform.SetParent(trashContainer);
-                Vector3 pos = new Vector3(Random.Range(-10, 10), Random.Range(0, -5));
+                Vector3 pos = new Vector3(Random.Range(-8f, 8f), Random.Range(0f, -5f));
                 TrashMove(go, pos);
             }
         }
