@@ -17,6 +17,7 @@ public class Login : MonoSingleton<Login> {
 
     public void Connect()
     {
+        Debug.Log("Connect");
         //This tells Photon to make sure all players - which are in the same room - always load the same scene
         PhotonNetwork.automaticallySyncScene = true;
 
