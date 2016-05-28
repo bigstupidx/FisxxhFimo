@@ -167,6 +167,23 @@ public class Move2 : Photon.MonoBehaviour
         
     }
 
+    public void SetIsFreeze(bool _isFreezee)
+    {
+        this.isFreeze = _isFreezee;
+        if (isFreeze)
+        {
+            _myRigidbody.gravityScale = 1;
+
+            GetComponent<Animator>().enabled = false;
+            //myBox.isTrigger = true;
+        }
+        else {
+            _myRigidbody.gravityScale = 0;
+
+            GetComponent<Animator>().enabled = true;
+        }
+    }
+
     public void Unfreeze()
     {
         _myRigidbody.gravityScale = 0;

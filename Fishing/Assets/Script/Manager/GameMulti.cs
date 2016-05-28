@@ -9,9 +9,10 @@ public class GameMulti : GameMode {
     #region Method override from GameMode
     public override void StartGame()
     {
-        
         this.prefabBoatMulti = GameManager.Instance.prefabBoatMulti;
         base.StartGame();
+
+        GameManager.Instance.trashSpawn.isSpawn = false;
         //Handle Multi
         if (PhotonNetwork.isMasterClient)
         {
@@ -178,6 +179,9 @@ public class GameMulti : GameMode {
 
     void PrepareRunGame()
     {
+
+        GameManager.Instance.trashSpawn.isSpawn = true;
+
         //this.StartGame();
         this.timeGame = 60;
         foreach (var entry in this.fishsDic)

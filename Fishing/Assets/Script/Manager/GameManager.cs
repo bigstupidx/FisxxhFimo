@@ -29,6 +29,9 @@ public class GameManager : MonoSingleton<GameManager>
     public int Score;
     public int FishGoal;
 
+    //Trash Spawm
+    public TrashSpawn trashSpawn;
+
     //UI MUlti
     //public GameObject bntStartGame;
     //public GameObject txtWaiting;
@@ -42,7 +45,7 @@ public class GameManager : MonoSingleton<GameManager>
     void Start()
     {
         isUpdateData = false;
-
+        trashSpawn.isSpawn = false;
         StartGame();
     }
 

@@ -53,6 +53,8 @@ public class GameMode : MonoBehaviour
         fishDies = new Dictionary<int, GameObject>();
         timeGame = 60;
         catchFish = false;
+
+        GameManager.Instance.trashSpawn.isSpawn = true;
         //fishContainer = GameManager.Instance.FishContain;
 
         //prefabBoat = GameManager.Instance.prefabBoat;
@@ -153,7 +155,8 @@ public class GameMode : MonoBehaviour
     {
         if (fishsDic.ContainsValue(fish))
         {
-            fish.GetComponent<Move2>().isFreeze = true;
+            //fish.GetComponent<Move2>().isFreeze = true;
+            fish.GetComponent<Move2>().SetIsFreeze(true);
             fishDies.Add(fish.GetComponent<Move2>().FishInf.Id, fish);
             fishsDic.Remove(fish.GetComponent<Move2>().FishInf.Id);
         }
@@ -174,7 +177,9 @@ public class GameMode : MonoBehaviour
                 Debug.Log("Hoi sinh fish");
                 //fish Die
                 GameObject fish = pair.Value;
-                fish.GetComponent<Move2>().isFreeze = false;
+                fish.GetComponent<Move2>().SetIsFreeze(false);//isFreeze = false;
+                
+
                 fishDies.Remove(pair.Key);
 
                 fishsDic.Add(pair.Key, pair.Value);
@@ -201,7 +206,9 @@ public class GameMode : MonoBehaviour
             {
                 //fish Die
                 GameObject fish = pair.Value;
-                fish.GetComponent<Move2>().isFreeze = true;
+
+                fish.GetComponent<Move2>().SetIsFreeze(true);
+                //fish.GetComponent<Move2>().isFreeze = true;
                 fishsDic.Remove(pair.Key);
 
                 fishDies.Add(pair.Key, pair.Value);
