@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6054c73c7a220674eb30e28df2f09220
-timeCreated: 1464463114
+timeCreated: 1464467911
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -13,6 +13,8 @@ TextureImporter:
     21300012: UI-Main-SD_viet_6
     21300014: UI-Main-SD_viet_7
     21300016: UI-Main-SD_viet_8
+    21300018: UI-Main-SD_viet_9
+    21300020: UI-Main-SD_viet_10
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -221,23 +223,56 @@ TextureImporter:
     - name: UI-Main-SD_viet_8
       rect:
         serializedVersion: 2
-        x: 1165
-        y: 1611
-        width: 145
-        height: 56
+        x: 1167
+        y: 1610
+        width: 142
+        height: 58
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 59.5, y: 28}
-        - {x: -60.5, y: 28}
-        - {x: -72.5, y: 9}
-        - {x: -72.5, y: -7}
-        - {x: -60.5, y: -28}
-        - {x: 65.5, y: -28}
-        - {x: 72.5, y: -15}
-        - {x: 72.5, y: 10}
-        - {x: 68.5, y: 21}
+      - - {x: -65, y: 29}
+        - {x: -71, y: 19}
+        - {x: -71, y: -12}
+        - {x: -67, y: -27}
+        - {x: -60, y: -29}
+        - {x: 67, y: -29}
+        - {x: 71, y: -16}
+        - {x: 71, y: 19}
+        - {x: 64, y: 29}
+    - name: UI-Main-SD_viet_9
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 1774
+        width: 158
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -79, y: 25.5}
+        - {x: -79, y: -25.5}
+        - {x: 79, y: -25.5}
+        - {x: 79, y: 25.5}
+    - name: UI-Main-SD_viet_10
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 1999
+        width: 125
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -47.5, y: 23.5}
+        - {x: -57.5, y: 10.5}
+        - {x: -62.5, y: 0.5}
+        - {x: -62.5, y: -23.5}
+        - {x: 62.5, y: -23.5}
+        - {x: 62.5, y: 22.5}
+        - {x: 54.5, y: 23.5}
     outline: []
   spritePackingTag: 
   userData: 

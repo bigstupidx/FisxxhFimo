@@ -20,6 +20,8 @@ public class CScreenManager : MonoSingleton<CScreenManager> {
     private Dictionary<eScreenType, GameObject> dicScreen = new Dictionary<eScreenType, GameObject>();
 
     public GameObject currScreen;
+
+    public GameObject uiGerenal;
     void Awake()
     {
         InitDictionary();
@@ -55,6 +57,20 @@ public class CScreenManager : MonoSingleton<CScreenManager> {
     {
         DisableAllScreen();
         currScreen = GetScreenByType(type);
+        if(type== eScreenType.GAME_PLAY)
+        {
+            if(uiGerenal)
+            {
+                uiGerenal.SetActive(false);
+            }
+        }
+        else
+        {
+            if (uiGerenal)
+            {
+                uiGerenal.SetActive(true);
+            }
+        }
         if(currScreen)
         {
             currScreen.SetActive(true);
