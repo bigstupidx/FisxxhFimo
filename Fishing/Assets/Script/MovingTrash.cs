@@ -2,7 +2,7 @@
 using System.Collections;
 using Holoville.HOTween;
 
-public class MovingTrash : MonoBehaviour
+public class MovingTrash : Photon.MonoBehaviour
 {
     public float radius;
 
@@ -20,6 +20,18 @@ public class MovingTrash : MonoBehaviour
 	void Update () {
 	
 	}
+
+    public void MoveTrash(Vector3 newPos)
+    {
+        photonView.RPC("OnMove", PhotonTargets.AllBufferedViaServer, new object[] { newPos });
+    }
+
+    [PunRPC]
+    public void OnMove(Vector3 newPos)
+    {
+        HOTween.To(transform, 3f, new TweenParms()
+            .Prop("position", newPos));
+    }
 
     public void Shake()
     {

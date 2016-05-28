@@ -2,7 +2,7 @@
 using System.Collections;
 using Holoville.HOTween;
 
-public class Trash : MonoBehaviour
+public class Trash : Photon.MonoBehaviour
 {
     public float time;
     public GameObject smoke;
@@ -19,6 +19,17 @@ public class Trash : MonoBehaviour
     void Update()
     {
         Explose();
+    }
+
+    public void MoveTrash(Vector3 newPos)
+    {
+        photonView.RPC("OnMove", PhotonTargets.AllBufferedViaServer, new object[] { newPos });
+    }
+
+    [PunRPC]
+    public void OnMove(Vector3 newPos)
+    {
+        HOTween.To(transform, 2f, "position", newPos);
     }
 
     public void Explose()

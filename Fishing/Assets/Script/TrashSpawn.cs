@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Holoville.HOTween;
 
-public class TrashSpawn : Photon.MonoBehaviour
+public class TrashSpawn : MonoBehaviour
 {
     public List<GameObject> trashPoint;
     public Transform trashContainer; 
@@ -82,16 +82,16 @@ public class TrashSpawn : Photon.MonoBehaviour
         { 
             go = Instantiate(trash[trashID], trashPoint[trashPointID].transform.position, Quaternion.identity) as GameObject;
             go.transform.SetParent(trashContainer);
-            TrashMove(go, pos);
+            
         }
         else
         {
             go = PhotonNetwork.Instantiate(trash[trashID].name, trashPoint[trashPointID].transform.position, Quaternion.identity, 0) as GameObject;
 
-            photonView.RPC("OnMove", PhotonTargets.AllBufferedViaServer, new object[] { go, pos });
+            //photonView.RPC("OnMove", PhotonTargets.AllBufferedViaServer, new object[] { go, pos });
         }
 
-       
+        TrashMove(go, pos);
        
 
         //Kill fish
@@ -108,8 +108,14 @@ public class TrashSpawn : Photon.MonoBehaviour
     public void TrashMove(GameObject trash, Vector3 pos)
     {
         MovingTrash movingTrash = trash.GetComponent<MovingTrash>();
-        HOTween.To(trash.transform, 3f, new TweenParms()
-            .Prop("position", pos)
-            /*.OnComplete(movingTrash.Shake)*/);
+        if (GameManager.Instance.gameModeConfig == GameModeConfig.GAME_OFFLINE)
+        {
+            movingTrash.OnMove(pos);
+        }else{
+            movingTrash.MoveTrash(pos);
+        }   
+
+        
+           // /*.OnComplete(movingTrash.Shake)*/);
     }
 }

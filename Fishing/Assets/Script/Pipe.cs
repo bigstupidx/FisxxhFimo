@@ -48,13 +48,12 @@ public class Pipe : Photon.MonoBehaviour
         else
         {
             go = PhotonNetwork.Instantiate(trash.name, trashPoint.position, Quaternion.identity, 0) as GameObject;
-            photonView.RPC("OnMove", PhotonTargets.AllBufferedViaServer, new object[] { go, newPos });
+            OnMove(go, newPos);
+            //photonView.RPC("OnMove", PhotonTargets.AllBufferedViaServer, new object[] { go, newPos });
         }
     }
-
-    [PunRPC]
     public void OnMove(GameObject go, Vector3 newPos)
     {
-        HOTween.To(go.transform, 2f, "position", newPos);
+        go.GetComponent<Trash>().MoveTrash(newPos);
     }
 }
