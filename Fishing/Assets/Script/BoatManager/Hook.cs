@@ -107,12 +107,9 @@ public class Hook : MonoBehaviour
                 PlayerAnimator.SetBool("IsUp", false);
                 if (Fish != null)
                 {
-                    if (Fish.tag == "PowerUp")
+                    if (Fish.tag == "Trash")
                     {
-                        if (Fish.name == "Faster")
-                        {
-                            SpeedBonus = 2;
-                        }
+                        // TODO: cuu 1 con ca, set isFreeze = false;
                     }
                     else
                     {
@@ -225,7 +222,7 @@ public class Hook : MonoBehaviour
         Fish = trashObj;
         Fish.transform.localScale = new Vector3(Mathf.Abs(Fish.transform.localScale.x), Fish.transform.localScale.y);
         Fish.transform.right = Root.transform.up;
-        trashObj.GetComponent<Trash>().enabled = false;
+        trashObj.GetComponent<MovingTrash>().enabled = false;
     }
 
     void DrawLine()

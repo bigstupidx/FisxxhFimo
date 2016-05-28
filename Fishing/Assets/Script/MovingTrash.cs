@@ -13,7 +13,8 @@ public class MovingTrash : MonoBehaviour
 	void Start ()
     { 
         //Shake();
-	}
+	    
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -32,5 +33,11 @@ public class MovingTrash : MonoBehaviour
                     .Prop("position", pos2)
                     .Loops(-1, LoopType.YoyoInverse));
             }));
+    }
+
+    void OnDisable()
+    {
+        //Debug.LogError("False");
+        HOTween.Pause(gameObject);
     }
 }

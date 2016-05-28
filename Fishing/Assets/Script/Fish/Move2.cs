@@ -75,11 +75,11 @@ public class Move2 : Photon.MonoBehaviour
         if (isFreeze)
         {
             _myRigidbody.gravityScale = 1;
-            myBox.enabled = true;
+            myBox.isTrigger = false;
             return;
         }
         _myRigidbody.gravityScale = 0;
-        myBox.enabled = false;
+        myBox.isTrigger = true;
         if (_currentWaypoint < _twoWayPoint.Length)
         {
             Vector3 target = _twoWayPoint[_currentWaypoint];
