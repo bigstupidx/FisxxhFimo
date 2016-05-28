@@ -28,7 +28,7 @@ public class GameOffline : GameMode
     {
         //GameObject boat = GameManagerNew.Instance.CreateBoatPlayerOffline();
         GameObject boat = Instantiate(GameManager.Instance.prefabBoat, Vector3.zero, Quaternion.identity) as GameObject;
-        //boat.GetComponent<BoatManager>().ApplyRandomeSpot();
+        boat.GetComponent<BoatManager>().ApplyRandomeSpot();
         SwipeDetector.Instance.boat = boat.GetComponent<BoatManager>();
         //base.CreateBoatPlayer();
     }

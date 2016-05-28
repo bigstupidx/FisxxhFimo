@@ -74,16 +74,18 @@ public class Hook : MonoBehaviour
             {
                 if (Fish.tag == "Fish")
                 {
-                    //CalculateFishPos(); TODO: uncomment
-                    //Fish.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                    //GetComponent<BoxCollider2D>().enabled = false;
+                    CalculateFishPos();// TODO: uncomment
+                    Fish.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    GetComponent<BoxCollider2D>().enabled = false;
                 }
-                else {
+                else
+                {
                     Debug.Log("BackToBoat: Can't not calculate Fish pos. Tag = " + Fish.tag);
                 }
 
             }
-            else {
+            else
+            {
                 Debug.Log("BackToBoat: Fish null");
             }
             float distance = Vector3.Magnitude(BoatPos.position - transform.position);
@@ -142,28 +144,29 @@ public class Hook : MonoBehaviour
             return;
         }
 
-        //if (other.tag == "Mouth")
-        //{
-        //    GameObject fishObj = other.transform.parent.gameObject;
-        //    if (!fishObj.GetComponent<Move2>().isCatch)
-        //    {
-        //        IsMove = false;
-        //        IsBack = true;
-        //        GetComponent<BoxCollider2D>().enabled = false;
-        //        PlayerAnimator.SetBool("IsUp", true);
-        //        PlayerAnimator.SetBool("IsCatch", false);
+        if (other.tag == "Mouth")
+        {
+            GameObject fishObj = other.transform.parent.gameObject;
+            if (!fishObj.GetComponent<Move2>().isCatch)
+            {
+                IsMove = false;
+                IsBack = true;
+                GetComponent<BoxCollider2D>().enabled = false;
+                PlayerAnimator.SetBool("IsUp", true);
+                PlayerAnimator.SetBool("IsCatch", false);
 
 
-        //        if (GameManagerNew.Instance.gameModeConfig == GameModeConfig.GAME_OFFLINE)
-        //        {
-        //            fishObj.GetComponent<Move2>().isCatch = true;
-        //            boatMan.CatchFish(fishObj);
-        //        }
-        //        else
-        //        {
-        //            fishObj.GetComponent<Move2>().CatchByBoat(boatMan.photonView.viewID);
-        //        }
-        //    }
+                if (GameManager.Instance.gameModeConfig == GameModeConfig.GAME_OFFLINE)
+                {
+                    fishObj.GetComponent<Move2>().isCatch = true;
+                    boatMan.CatchFish(fishObj);
+                }
+                else
+                {
+                    //fishObj.GetComponent<Move2>().CatchByBoat(boatMan.photonView.viewID);
+                }
+            }
+        }
 
         //play sound
 
@@ -171,59 +174,40 @@ public class Hook : MonoBehaviour
 
         Audio.Instance.PlayEffect(SoundType.SWIRLING, true, 0);
     }
+
+    public void CatchFish(GameObject fishObj)
+    {
+        IsMove = false;
+        IsBack = true;
+        PlayerAnimator.SetBool("IsUp", true);
+        PlayerAnimator.SetBool("IsCatch", false);
+
+        Fish = fishObj;
+        if (Fish.GetComponent<Move2>())
+        {
+            Fish.GetComponent<Move2>().enabled = false;
+        }
+        Dis = (GetComponent<Renderer>().bounds.extents.y + Fish.GetComponent<Renderer>().bounds.extents.x) - 0.05f;
+        //Speed -= Fish.GetComponent<FishProperties>().Weight;
+        Fish.transform.localScale = new Vector3(Mathf.Abs(Fish.transform.localScale.x), Fish.transform.localScale.y);
+        Fish.transform.right = Root.transform.up;
+    }
+    void DrawLine()
+    {
+        _line.SetPosition(0, new Vector3(Root.position.x, Root.transform.position.y, -5));
+        _line.SetPosition(1, new Vector3(End.position.x, End.position.y, -5));
+        float Distance = Vector3.Distance(Root.position, End.position);
+        _line.material.mainTextureScale = new Vector2(Distance * 2, 1f);
+        //Debug.DrawLine(Root.transform.position, transform.position);
+    }
+
+    void CalculateFishPos()
+    {
+        Vector3 right = new Vector3(Root.position.x, Root.position.y) - new Vector3(Root.position.x - 1, Root.position.y);
+        Vector3 down = new Vector3(Root.position.x, Root.position.y) - new Vector3(transform.position.x, transform.position.y);
+        float angle = Vector3.Angle(down, right);
+        float x = transform.position.x + (Dis * Mathf.Cos(135 + angle * Mathf.Deg2Rad));
+        float y = transform.position.y + (Dis * Mathf.Sin(135 + angle * Mathf.Deg2Rad));
+        Fish.transform.position = new Vector3(x, y);
+    }
 }
-
-//public void CatchFish(GameObject fishObj)
-//{
-//    IsMove = false;
-//    IsBack = true;
-//    PlayerAnimator.SetBool("IsUp", true);
-//    PlayerAnimator.SetBool("IsCatch", false);
-
-//    Fish = fishObj;
-//    if (Fish.GetComponent<Move2>())
-//    {
-//        Fish.GetComponent<Move2>().enabled = false;
-//    }
-//    Dis = (GetComponent<Renderer>().bounds.extents.y + Fish.GetComponent<Renderer>().bounds.extents.x) - 0.05f;
-//    Speed -= Fish.GetComponent<FishProperties>().Weight;
-//    Fish.transform.localScale = new Vector3(Mathf.Abs(Fish.transform.localScale.x), Fish.transform.localScale.y);
-//    Fish.transform.right = Root.transform.up;
-//}
-
-//void DrawLine()
-//{
-//    _line.SetPosition(0, new Vector3(Root.position.x, Root.transform.position.y, -5));
-//    _line.SetPosition(1, new Vector3(End.position.x, End.position.y, -5));
-//    float Distance = Vector3.Distance(Root.position, End.position);
-//    _line.material.mainTextureScale = new Vector2(Distance*2, 1f);
-//    //Debug.DrawLine(Root.transform.position, transform.position);
-//}
-
-//void CalculateFishPos()
-//{
-//    Vector3 right = new Vector3(Root.position.x, Root.position.y) - new Vector3(Root.position.x - 1, Root.position.y);
-//    Vector3 down = new Vector3(Root.position.x, Root.position.y) - new Vector3(transform.position.x, transform.position.y);
-//    float angle = Vector3.Angle(down, right);
-//    float x = transform.position.x + (Dis * Mathf.Cos(135 + angle * Mathf.Deg2Rad));
-//    float y = transform.position.y + (Dis * Mathf.Sin(135 + angle * Mathf.Deg2Rad));
-//    Fish.transform.position = new Vector3(x, y);
-//}
-
-//public void PowerUp()
-//{
-//    if (PowerUps != string.Empty)
-//    {
-//        if (PowerUpTime > 0)
-//        {
-//            PowerUpTime -= Time.deltaTime;
-//        }
-//        else
-//        {
-//            PowerUps = "";
-//            PowerUpTime = 10;
-//            SpeedBonus = 0;
-//        }
-//    }
-//}
-

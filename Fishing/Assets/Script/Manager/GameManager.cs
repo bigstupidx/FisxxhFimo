@@ -70,7 +70,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     void StartGame()
     {
-        int currentLV = PlayerPrefs.GetInt("PlayLevel", 0);
+        //int currentLV = PlayerPrefs.GetInt("PlayLevel", 0);
         listSpots = new int[Spots.Length];
         switch (gameModeConfig)
         {
@@ -78,7 +78,7 @@ public class GameManager : MonoSingleton<GameManager>
                 gameMode = new GameOffline();
                 break;
             case GameModeConfig.GAME_MULTI_VS:
-                currentLV = Random.Range(0, 40);
+                //currentLV = Random.Range(0, 40);
                 //gameMode = new GameMulti();
 
                 //if (PhotonNetwork.isMasterClient)
@@ -96,21 +96,6 @@ public class GameManager : MonoSingleton<GameManager>
         //Debug.Log("Load level play here");
         //timeGame = 60;
 
-        //LoadLevel(currentLV);
-        //LevelInfo = DataLoader.Instance.ListLevels[currentLV];
-        if (gameModeConfig == GameModeConfig.GAME_OFFLINE)
-        {
-            LoadUIAndBackground(currentLV);
-        }
-        else
-        {
-            //if (PhotonNetwork.isMasterClient)
-            //{
-            //    LoadUIAndBackground(currentLV);
-            //}
-        }
-        //SetGoalUI();
-        //LoadBackground(LevelInfo.Lv);
         gameMode.StartGame();
         StartCoroutine(StartGameByFrame());
     }
@@ -121,41 +106,9 @@ public class GameManager : MonoSingleton<GameManager>
         //txtWaiting.SetActive(false);
     }
 
-    //Sync with Multi VS Mode
-    public void LoadUIAndBackground(int level)
-    {
-        //LoadLevel(level);
-        //LevelInfo = DataLoader.Instance.ListLevels[level];
-    }
-
-    public void SetGameState()//GameState gameState)
-    {
-        //gameMode.gameState = gameState;
-    }
-
     public void SetTxtTimer(float time)
     {
         //txtTimer.text = "0:" + ((int)time).ToString();
-    }
-
-    public void AddFishInfo(FishInfo fishInfo)
-    {
-        gameMode.AddFishInfo(fishInfo);
-    }
-
-    public void ResetGameWaiting()
-    {
-        if (gameModeConfig != GameModeConfig.GAME_OFFLINE)
-        {
-            gameMode.ResetGameWaiting();
-        }
-    }
-
-    //Test for Button Start
-    public void TestToStartGame()
-    {
-        gameMode.TestToWaiting();
-
     }
 
     IEnumerator StartGameByFrame()

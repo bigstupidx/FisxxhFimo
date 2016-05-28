@@ -9,22 +9,69 @@ public class BoatManager : MonoSingleton<BoatManager>
     public bool IsSwing;
     public float SwingDir;
 
-    public Hook myHook;
+    [HideInInspector]
+    public bool isMine;
 
+    [HideInInspector]
     public Transform[] _spots;
-    public int newSpot;
+
+    //[HideInInspector]
     public int CurrentSpot;
+    public int newSpot;
+    public Hook myHook;
+    public bool isOnline;
 
+    public int Score;
+    public int FishGoal;
+
+    protected string boat_name;
+    protected string character_name;
     // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    Swing();
-	}
+    void Start()
+    {
+        Debug.Log("Boat offfline");
+        PreStart();
+    }
 
+    public void PreStart()
+    {
+        LoadBoatNPlayer();
+        IsSwing = true;
+        _spots = GameManager.Instance.Spots;
+        CurrentSpot = -1;
+        newSpot = -1;
+        Score = 0;
+        FishGoal = 0;
+        this.ApplyRandomeSpot();
+        StartGame();
+    }
+
+
+    public virtual void StartGame()
+    {
+        isMine = true;
+        isOnline = false;
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!isMine)
+        {
+            return;
+        }
+
+        Swing();
+    }
+
+    public void CatchFish(GameObject Fish)
+    {
+        Debug.Log("My hook in Boat Manager");
+        myHook.CatchFish(Fish);
+    }
+
+    // Swing the worm hook.
     public void Swing()
     {
         if (IsSwing)
@@ -42,9 +89,7 @@ public class BoatManager : MonoSingleton<BoatManager>
             }
         }
     }
-
-
-    //hook fish
+    [ContextMenu("move")]
     public virtual void Hook() //stop swing, hook move forward.
     {
 
@@ -60,7 +105,43 @@ public class BoatManager : MonoSingleton<BoatManager>
         Audio.Instance.Hook();
     }
 
+    [ContextMenu("test")]
+    public void Test()
+    {
+        Transform go = SwingSpot.transform.GetChild(0);
+        Debug.Log("Angle: " + Vector3.Angle(go.position, Vector3.right));
+    }
 
+    public void ApplyRandomeSpot()
+    {
+        int index = GameManager.Instance.GetAvailableSpot();
+        Debug.Log("Apply Random  = " + index);
+        CurrentSpot = -1;
+        //Debug.Log("Apply Randome with index = " + index + "-- current spot = " + CurrentSpot);
+        ApplyIndexSpot(index, false);
+    }
+
+
+    public void ApplyIndexSpot(int index, bool hasChange)
+    {
+        GameManager.Instance.SetSpotByIndex(index, CurrentSpot, transform, hasChange);
+        transform.localPosition = Vector3.zero;
+        CurrentSpot = index;
+        newSpot = index;
+        if (isMine)
+        {
+            SetIndexPlayerOnline();
+        }
+    }
+
+    public virtual void SetIndexPlayerOnline()
+    {
+
+    }
+
+
+
+    [ContextMenu("move right")]
     public virtual void MoveRight()
     {
         if (IsSwing)
@@ -72,7 +153,7 @@ public class BoatManager : MonoSingleton<BoatManager>
                 if (GameManager.Instance.CheckSpotAvailable(newSpot))
                 {
                     //Offline nen khong can
-                    //ApplyIndexSpot(newSpot, isOnline);
+                    ApplyIndexSpot(newSpot, isOnline);
                 }
                 else
                 {
@@ -98,7 +179,7 @@ public class BoatManager : MonoSingleton<BoatManager>
                 {
 
                     //Offline nen ko can
-                    //ApplyIndexSpot(newSpot, isOnline);
+                    ApplyIndexSpot(newSpot, isOnline);
                 }
                 else
                 {
@@ -112,4 +193,19 @@ public class BoatManager : MonoSingleton<BoatManager>
             }
         }
     }
+
+
+    public virtual void LoadBoatNPlayer()
+    {
+        Debug.Log("Load Boat Offline");
+        LoadDataOrSyncBoat();
+        //SetBoatNPlayer();
+    }
+
+    public virtual void LoadDataOrSyncBoat()
+    {
+        //this.boat_name = PlayerPrefs.GetString(RoomProperties.PLAYER_BOAT, "Default");
+        //this.character_name = PlayerPrefs.GetString(RoomProperties.PLAYER_NAME_CHARACTER, "Cyan");
+    }
+
 }
