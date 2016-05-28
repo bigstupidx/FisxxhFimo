@@ -9,13 +9,13 @@ public class GameMulti : GameMode {
     #region Method override from GameMode
     public override void StartGame()
     {
-        base.StartGame();
+        
         this.prefabBoatMulti = GameManager.Instance.prefabBoatMulti;
-
+        base.StartGame();
         //Handle Multi
         if (PhotonNetwork.isMasterClient)
         {
-            gameState = GameState.GAME_READY;
+            gameState = GameState.GAME_WAITING;
             this.timeGame = GameServer.Time_Wating;
             SyncGameStateForServer();
 
@@ -50,14 +50,14 @@ public class GameMulti : GameMode {
         switch (gameState)
         {
             case GameState.GAME_READY:
-                //ReadyGame();
+                ReadyGame();
                 break;
             case GameState.GAME_WAITING:
-                //timeGame -= timeUpdate;
-                //if (timeGame <= 0)
-                //{
-                //    ChangeStateStartGame();
-                //}
+                timeGame -= timeUpdate;
+                if (timeGame <= 0)
+                {
+                    ChangeStateStartGame();
+                }
                 //Create Fish
                 WaitingGame(timeUpdate);
                 break;
@@ -99,9 +99,10 @@ public class GameMulti : GameMode {
 
     public override void CreateBoatPlayer()
     {
-        //base.CreateBoatPlayer ();
-        //PhotonNetwork.Instantiate(this.prefabBoatMulti.name, Vector3.zero, Quaternion.identity, 0);
+        //base.CreateBoatPlayer();
+        GameObject gameObj = PhotonNetwork.Instantiate(this.prefabBoatMulti.name, Vector3.zero, Quaternion.identity, 0) as GameObject;
 
+        SwipeDetector.Instance.boat = gameObj.GetComponent<BoatMulti>();
     }
 
     public override void CreateFish(FishInfo fishInfo)

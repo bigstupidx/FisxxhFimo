@@ -39,6 +39,7 @@ public class GameMode : MonoBehaviour
 
     public virtual void StartGame()
     {
+        Debug.Log("Start game here aaa");
         maxFishCount = 15;
         //this.levelInfo = levelInfo;
         fishInfosDic = new Dictionary<int, FishInfo>();

@@ -142,6 +142,7 @@ public class BoatManager : Photon.MonoBehaviour
 
     public void ApplyIndexSpot(int index, bool hasChange)
     {
+        Debug.Log("Current index = " + CurrentSpot + " - new index = " + index);
         GameManager.Instance.SetSpotByIndex(index, CurrentSpot, transform, hasChange);
         transform.localPosition = Vector3.zero;
         CurrentSpot = index;

@@ -16,7 +16,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public Transform[] Spots;
 
-    [HideInInspector]
+   // [HideInInspector]
     public int[] listSpots;
 
     public GameObject prefabBoat;
