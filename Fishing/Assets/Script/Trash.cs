@@ -8,6 +8,7 @@ public class Trash : MonoBehaviour
     public GameObject smoke;
     public CircleCollider2D box;
 
+    public float radius;
     // Use this for initialization
     void Start()
     {
@@ -28,7 +29,8 @@ public class Trash : MonoBehaviour
         }
         else
         {
-            box.radius = 2.5f;
+            box.enabled = true;
+            box.radius = radius;
             HOTween.To(smoke.transform, 0.4f, new TweenParms()
                 .Prop("localScale", new Vector3(3, 1, 1.5f))
                 .Ease(EaseType.EaseOutCubic)
@@ -37,13 +39,6 @@ public class Trash : MonoBehaviour
                     Destroy(gameObject);
                 }));
         }
-    }
-
-    public void ScaleCollider()
-    {
-        float t = 0;
-        box.radius = Mathf.Lerp(0, 2.5f, t);
-        t += Time.deltaTime;
     }
 
     void OnTriggerEnter2D(Collider2D col)
