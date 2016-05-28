@@ -52,7 +52,7 @@ public class GameMode : MonoBehaviour
         trashs = new List<GameObject>();
         fishDies = new Dictionary<int, GameObject>();
         timeGame = 60;
-        catchFish = true;
+        catchFish = false;
         //fishContainer = GameManager.Instance.FishContain;
 
         //prefabBoat = GameManager.Instance.prefabBoat;

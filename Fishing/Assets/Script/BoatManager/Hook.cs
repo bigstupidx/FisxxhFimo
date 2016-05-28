@@ -181,7 +181,7 @@ public class Hook : MonoBehaviour
             }
             else
             {
-                //Destroy Fish
+                //Destroy Fish TODO: despawn fish
             }
         }
 
