@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Holoville.HOTween;
 
-public class TrashSpawn : MonoBehaviour
+public class TrashSpawn : Photon.MonoBehaviour
 {
     public List<GameObject> trashPoint;
     public Transform trashContainer; 
@@ -75,14 +75,37 @@ public class TrashSpawn : MonoBehaviour
     {
         int trashID = Random.Range(0, trash.Count);
         int trashPointID = Random.Range(0, this.trashPoint.Count);
-        GameObject go = Instantiate(trash[trashID], trashPoint[trashPointID].transform.position, Quaternion.identity) as GameObject;
-        go.transform.SetParent(trashContainer);
+        GameObject go;
+
         Vector3 pos = new Vector3(Random.Range(-8f, 8f), Random.Range(0f, -5f));
-        TrashMove(go, pos);
+        if (GameManager.Instance.gameModeConfig == GameModeConfig.GAME_OFFLINE)
+        { 
+            go = Instantiate(trash[trashID], trashPoint[trashPointID].transform.position, Quaternion.identity) as GameObject;
+            go.transform.SetParent(trashContainer);
+            TrashMove(go, pos);
+        }
+        else
+        {
+            go = PhotonNetwork.Instantiate(trash[trashID].name, trashPoint[trashPointID].transform.position, Quaternion.identity, 0) as GameObject;
+
+            photonView.RPC("OnMove", PhotonTargets.AllBufferedViaServer, new object[] { go, pos });
+        }
+
+       
+        
+        
+
 
         //Kill fish
         GameManager.Instance.gameMode.AddTrash(go);
     }
+
+    void OnMove(GameObject go, Vector3 pos)
+    { 
+        
+    }
+
+
 
     public void TrashMove(GameObject trash, Vector3 pos)
     {
