@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public enum eScreenType
 {
@@ -88,4 +89,9 @@ public class CScreenManager : MonoSingleton<CScreenManager> {
 	void Update () {
 	
 	}
+
+    public void LoadSceneLogin()
+    {
+        SceneManager.LoadScene("Login");
+    }
 }
