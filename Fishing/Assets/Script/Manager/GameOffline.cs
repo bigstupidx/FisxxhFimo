@@ -53,6 +53,7 @@ public class GameOffline : GameMode
     {
         PlayerPrefs.SetInt("fish", GameManager.Instance.fishCountCollect);
         PlayerPrefs.SetInt("trash", GameManager.Instance.trashCountCollect);
+        PlayerPrefs.SetInt("Scene", (int)GameManager.Instance.gameModeConfig);
         SceneManager.LoadScene("End");
     }
 

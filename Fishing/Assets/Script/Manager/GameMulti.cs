@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameMulti : GameMode {
 
@@ -143,6 +144,14 @@ public class GameMulti : GameMode {
                 PhotonNetwork.Destroy(entry.Value);
             }
         }
+
+        PlayerPrefs.SetInt("fish", GameManager.Instance.fishCountCollect);
+        PlayerPrefs.SetInt("trash", GameManager.Instance.trashCountCollect);
+        PlayerPrefs.SetInt("Scene", (int)GameManager.Instance.gameModeConfig);
+
+        PhotonNetwork.automaticallySyncScene = false;
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("End");
 
     }
     #endregion

@@ -54,6 +54,10 @@ public class Pipe : Photon.MonoBehaviour
     }
     public void OnMove(GameObject go, Vector3 newPos)
     {
-        go.GetComponent<Trash>().MoveTrash(newPos);
+        if(go.GetComponent<Trash>())
+        {
+            go.GetComponent<Trash>().MoveTrash(newPos);
+        }
+        
     }
 }
