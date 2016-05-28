@@ -13,9 +13,15 @@ public class TrashSpawn : MonoBehaviour
     public Dictionary<string, GameObject> trashList;
     public float delay;
     public int startTrash;
+
+    public bool isSpawn;
 	// Use this for initialization
 	void Start ()
 	{
+	    if (GameManager.Instance.gameModeConfig == GameModeConfig.GAME_OFFLINE)
+	    {
+	        isSpawn = true;
+	    }
 	    delay = 0.3f;
 	    trashList = new Dictionary<string, GameObject>();
 	    trashList = trash.ToDictionary(x => x.name, x => x);
@@ -24,20 +30,23 @@ public class TrashSpawn : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	    if (startTrash > 0)
+	    if (isSpawn)
 	    {
-            InstantTrash();
-	        startTrash--;
-	    }
-	    else
-	    {
-	        if (startTrash == 0)
-	        {
-	            startTrash--;
-	            delay = 3;
-	        }
-	    }
-	    SpawnTrash();
+            if (startTrash > 0)
+            {
+                InstantTrash();
+                startTrash--;
+            }
+            else
+            {
+                if (startTrash == 0)
+                {
+                    startTrash--;
+                    delay = 3;
+                }
+            }
+            SpawnTrash();
+        }
 	}
 
     public void SpawnTrash()
