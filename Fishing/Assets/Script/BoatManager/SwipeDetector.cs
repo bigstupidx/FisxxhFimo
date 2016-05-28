@@ -23,13 +23,13 @@ public class SwipeDetector : MonoSingleton<SwipeDetector>, IPointerDownHandler, 
     public void left()
     {
         Debug.Log("Left");
-        //boat.MoveLeft();
+        boat.MoveLeft();
     }
 
     public void right()
     {
         Debug.Log("Right");
-    //boat.MoveRight();
+        boat.MoveRight();
     }
 
 
