@@ -168,6 +168,11 @@ public class Hook : MonoBehaviour
             }
         }
 
+        if (other.tag == "Trash")
+        {
+              
+        }
+
         //play sound
 
         Audio.Instance.StopHookSound();
