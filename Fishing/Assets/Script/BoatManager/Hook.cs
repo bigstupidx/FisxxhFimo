@@ -118,7 +118,7 @@ public class Hook : MonoBehaviour
                 Fish = null;
                 //GetComponent<BoxCollider2D>().enabled = true;
                 Speed = 4 + SpeedBonus;
-                //Audio.Instance.StopEffect(); TODO: uncomment
+                Audio.Instance.StopEffect();
             }
         }
     }
@@ -165,11 +165,12 @@ public class Hook : MonoBehaviour
         //        }
         //    }
 
-    }
+        //play sound
 
-    //play sound
-    //Audio.Instance.StopHookSound();
-    //Audio.Instance.PlayEffect(SoundType.SWIRLING, true, 0);
+        Audio.Instance.StopHookSound();
+
+        Audio.Instance.PlayEffect(SoundType.SWIRLING, true, 0);
+    }
 }
 
 //public void CatchFish(GameObject fishObj)

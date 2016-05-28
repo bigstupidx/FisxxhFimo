@@ -125,7 +125,7 @@ public class DataLoader : MonoSingleton<DataLoader>
                 ListPath.Add(listVec3.ToArray());
             }
         }
-
+        Debug.Log("DOne");
     }
     #endregion
 

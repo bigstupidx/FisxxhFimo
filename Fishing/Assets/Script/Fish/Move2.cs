@@ -47,7 +47,7 @@ public class Move2 : MonoBehaviour
     bool _loop = false;
     float _distance = 1;
 
-    [HideInInspector]
+    //[HideInInspector]
     public bool isCatch = false;
     public bool start_game;
 

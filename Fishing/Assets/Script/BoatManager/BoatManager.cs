@@ -57,7 +57,7 @@ public class BoatManager : MonoSingleton<BoatManager>
         hookObj.gameObject.GetComponent<BoxCollider2D>().enabled = true;
         GetComponentInChildren<Animator>().SetBool("IsCatch", true);
         IsSwing = false;
-        //Audio.Instance.Hook();
+        Audio.Instance.Hook();
     }
 
 
@@ -68,16 +68,16 @@ public class BoatManager : MonoSingleton<BoatManager>
             newSpot++;
             if (newSpot < _spots.Length)
             {
-            //    Debug.Log("Current: " + CurrentSpot);
-            //    if (GameManagerNew.Instance.CheckSpotAvailable(newSpot))
-            //    {
-            //        //Offline nen khong can
-            //        ApplyIndexSpot(newSpot, isOnline);
-            //    }
-            //    else {
-            //        MoveRight();
-            //    }
-            MoveRight();
+                Debug.Log("Current: " + CurrentSpot);
+                if (GameManager.Instance.CheckSpotAvailable(newSpot))
+                {
+                    //Offline nen khong can
+                    //ApplyIndexSpot(newSpot, isOnline);
+                }
+                else
+                {
+                    MoveRight();
+                }
             }
             else
             {
@@ -94,17 +94,16 @@ public class BoatManager : MonoSingleton<BoatManager>
             newSpot--;
             if (newSpot >= 0)
             {
-                //if (GameManagerNew.Instance.CheckSpotAvailable(newSpot))
-                //{
+                if (GameManager.Instance.CheckSpotAvailable(newSpot))
+                {
 
-                //    //Offline nen ko can
-                //    ApplyIndexSpot(newSpot, isOnline);
-                //}
-                //else
-                //{
-                //    MoveLeft();
-                //}
-                MoveLeft();
+                    //Offline nen ko can
+                    //ApplyIndexSpot(newSpot, isOnline);
+                }
+                else
+                {
+                    MoveLeft();
+                }
             }
             else
             {

@@ -28,10 +28,10 @@ public class GameMode : MonoBehaviour
 
     //public bool isUpdatedData = false;//for multi mode
 
-    public virtual void StartGame(Level levelInfo)
+    public virtual void StartGame()
     {
         maxFishCount = 15;
-        this.levelInfo = levelInfo;
+        //this.levelInfo = levelInfo;
         fishInfosDic = new Dictionary<int, FishInfo>();
         fishsDic = new Dictionary<int, GameObject>();
         timeGame = 60;
