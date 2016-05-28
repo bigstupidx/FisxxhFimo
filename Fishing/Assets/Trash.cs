@@ -6,6 +6,7 @@ public class Trash : MonoBehaviour
 {
     public float time;
     public GameObject smoke;
+    public CircleCollider2D box;
 
 	// Use this for initialization
 	void Start ()
@@ -35,5 +36,12 @@ public class Trash : MonoBehaviour
                     Destroy(gameObject);
                 }));
         }
+    }
+
+    public void ScaleCollider()
+    {
+        float t = 0;
+        box.radius = Mathf.Lerp(0, 2.5f, t);
+        t += Time.deltaTime;
     }
 }
