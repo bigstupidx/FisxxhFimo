@@ -131,16 +131,16 @@ public class GameMode : MonoBehaviour
 
     int RandomePath(string name)//GameObject fish
     {
-        //return Random.Range(700, 899);
-        if (name == "Crab" || name == "Hydro")
-        {
-            return Random.Range(500, 699);
-        }
-        else if (name == "ReaperFish" || name == "Piranha" || name == "GreatWhiteShark" || name == "HammerHeadShark")
-        {
-            return Random.Range(700, 899);
-        }
-        else
+        ////return Random.Range(700, 899);
+        ////if (name == "Crab" || name == "Hydro")
+        ////{
+        ////    return Random.Range(500, 699);
+        ////}
+        ////else if (name == "ReaperFish" || name == "Piranha" || name == "GreatWhiteShark" || name == "HammerHeadShark")
+        //{
+        //    return Random.Range(700, 899);
+        //}
+        //else
         {
             return Random.Range(0, 499);
         }

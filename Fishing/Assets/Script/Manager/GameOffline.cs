@@ -48,29 +48,9 @@ public class GameOffline : GameMode
         fishsDic.Remove(fishInfo.Id);
     }
 
-    //public override void EndGame()
-    //{
-    //    if (GameManager.Instance.Score >= levelInfo.GoldGoal &&
-    //        GameManager.Instance.FishGoal >= levelInfo.NumberFishGoal)
-    //    {
-    //        PlayerPrefs.SetString("Background", (levelInfo.Lv + 1).ToString());
-    //        if (levelInfo.Lv == PlayerPrefs.GetInt("UnlockedLevel"))
-    //        {
-    //            PlayerPrefs.SetInt("UnlockedLevel", levelInfo.Lv + 1);
-    //        }
-    //        PlayerPrefs.SetInt("PlayLevel", levelInfo.Lv + 1);
-    //    }
-    //    else
-    //    {
-    //        // PlayerPrefs.SetString("Background", (levelInfo.Lv).ToString());
-    //    }
-    //    //Debug.Log(PlayerPrefs.GetInt("Playlevel"));
-    //    // PlayerPrefs.SetString("Background", (PlayerPrefs.GetInt("Playlevel") / 5).ToString());
-    //    PlayerPrefs.SetInt("PlayerMoney", PlayerPrefs.GetInt("PlayerMoney") + GameManager.Instance.Score);
-    //    foreach (KeyValuePair<int, GameObject> entry in this.fishsDic)
-    //    {
-    //        Destroy(entry.Value);
-    //    }
-    //}
+    public override void EndGame()
+    {
+
+    }
 
 }

@@ -26,6 +26,11 @@ public class CScreenManager : MonoSingleton<CScreenManager> {
     void Awake()
     {
         InitDictionary();
+        if (Instance != this && Instance != null)
+        {
+            Destroy(Instance.gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
     }
 	// Use this for initialization
 	void Start () {
@@ -93,5 +98,11 @@ public class CScreenManager : MonoSingleton<CScreenManager> {
     public void LoadSceneLogin()
     {
         SceneManager.LoadScene("Login");
+    }
+
+    public void LoadEndGameUI()
+    {
+        SceneManager.LoadScene("GUI");
+        ShowScreenByType(eScreenType.GAME_FINISH);
     }
 }
