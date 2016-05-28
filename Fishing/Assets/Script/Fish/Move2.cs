@@ -51,8 +51,14 @@ public class Move2 : Photon.MonoBehaviour
     public bool isCatch = false;
     public bool start_game;
 
+    public bool isFreeze;
+
+    public BoxCollider2D myBox;
+
     void Start()
     {
+        myBox = GetComponent<BoxCollider2D>();
+        isFreeze = false;
         isCatch = false;
         _twoWayPoint = DataLoader.Instance.ListPath[FishInf.IdPath];
         _myRigidbody = gameObject.GetComponent<Rigidbody2D>();
@@ -66,7 +72,14 @@ public class Move2 : Photon.MonoBehaviour
         {
             return;
         }
-
+        if (isFreeze)
+        {
+            _myRigidbody.gravityScale = 1;
+            myBox.enabled = true;
+            return;
+        }
+        _myRigidbody.gravityScale = 0;
+        myBox.enabled = false;
         if (_currentWaypoint < _twoWayPoint.Length)
         {
             Vector3 target = _twoWayPoint[_currentWaypoint];

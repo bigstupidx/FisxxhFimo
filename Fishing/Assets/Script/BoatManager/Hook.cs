@@ -24,6 +24,8 @@ public class Hook : MonoBehaviour
     public float SpeedBonus = 0;
 
     public Sprite Sprite;
+
+    public bool catchFish;
     // Use this for initialization
     void Start()
     {
@@ -78,8 +80,15 @@ public class Hook : MonoBehaviour
                     Fish.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                     GetComponent<BoxCollider2D>().enabled = false;
                 }
+                else if (Fish.tag == "Trash")
+                {
+                    CalculateFishPos();// TODO: uncomment
+                    Fish.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    GetComponent<BoxCollider2D>().enabled = false;
+                }
                 else
                 {
+
                     Debug.Log("BackToBoat: Can't not calculate Fish pos. Tag = " + Fish.tag);
                 }
 
@@ -135,6 +144,7 @@ public class Hook : MonoBehaviour
     // Check collision with fish.
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.tag);
         if (other.tag == "Wall" && !IsBack)
         {
             IsMove = false;
@@ -146,31 +156,38 @@ public class Hook : MonoBehaviour
 
         if (other.tag == "Mouth")
         {
-            GameObject fishObj = other.transform.parent.gameObject;
-            if (!fishObj.GetComponent<Move2>().isCatch)
+            if (GameManager.Instance.gameMode.catchFish)
             {
-                IsMove = false;
-                IsBack = true;
-                GetComponent<BoxCollider2D>().enabled = false;
-                PlayerAnimator.SetBool("IsUp", true);
-                PlayerAnimator.SetBool("IsCatch", false);
+                GameObject fishObj = other.transform.parent.gameObject;
+                if (!fishObj.GetComponent<Move2>().isCatch)
+                {
+                    IsMove = false;
+                    IsBack = true;
+                    GetComponent<BoxCollider2D>().enabled = false;
+                    PlayerAnimator.SetBool("IsUp", true);
+                    PlayerAnimator.SetBool("IsCatch", false);
 
 
-                if (GameManager.Instance.gameModeConfig == GameModeConfig.GAME_OFFLINE)
-                {
-                    fishObj.GetComponent<Move2>().isCatch = true;
-                    boatMan.CatchFish(fishObj);
+                    if (GameManager.Instance.gameModeConfig == GameModeConfig.GAME_OFFLINE)
+                    {
+                        fishObj.GetComponent<Move2>().isCatch = true;
+                        boatMan.CatchFish(fishObj);
+                    }
+                    else
+                    {
+                        //fishObj.GetComponent<Move2>().CatchByBoat(boatMan.photonView.viewID);
+                    }
                 }
-                else
-                {
-                    //fishObj.GetComponent<Move2>().CatchByBoat(boatMan.photonView.viewID);
-                }
+            }
+            else
+            {
+                //Destroy Fish
             }
         }
 
         if (other.tag == "Trash")
         {
-              
+            CatchTrash(other.gameObject);
         }
 
         //play sound
@@ -197,6 +214,18 @@ public class Hook : MonoBehaviour
         Fish.transform.localScale = new Vector3(Mathf.Abs(Fish.transform.localScale.x), Fish.transform.localScale.y);
         Fish.transform.right = Root.transform.up;
     }
+
+    public void CatchTrash(GameObject trashObj)
+    {
+        IsMove = false;
+        IsBack = true;
+        PlayerAnimator.SetBool("IsUp", true);
+        PlayerAnimator.SetBool("IsCatch", false);
+        Fish = trashObj;
+        Fish.transform.localScale = new Vector3(Mathf.Abs(Fish.transform.localScale.x), Fish.transform.localScale.y);
+        Fish.transform.right = Root.transform.up;
+    }
+
     void DrawLine()
     {
         _line.SetPosition(0, new Vector3(Root.position.x, Root.transform.position.y, -5));

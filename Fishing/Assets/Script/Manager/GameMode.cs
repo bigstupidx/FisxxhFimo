@@ -33,6 +33,8 @@ public class GameMode : MonoBehaviour
     public Transform fishContainer;
     public BoatManager[] listPlayer;
 
+    public bool catchFish;
+
     //public bool isUpdatedData = false;//for multi mode
 
     public virtual void StartGame()
@@ -42,6 +44,7 @@ public class GameMode : MonoBehaviour
         fishInfosDic = new Dictionary<int, FishInfo>();
         fishsDic = new Dictionary<int, GameObject>();
         timeGame = 60;
+        catchFish = false;
         //fishContainer = GameManager.Instance.FishContain;
 
         //prefabBoat = GameManager.Instance.prefabBoat;
@@ -66,6 +69,10 @@ public class GameMode : MonoBehaviour
         if (timeGame <= 0)
         {
             EndGame();
+        }
+        if (timeGame <= 15)
+        {
+            catchFish = true;
         }
     }
 

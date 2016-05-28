@@ -9,7 +9,7 @@ public class GameManager : MonoSingleton<GameManager>
     public GameModeConfig gameModeConfig;
 
     //[HideInInspector]
-    GameMode gameMode;
+    public GameMode gameMode;
 
     const float TIME_UPDATE = 0.1f;
     float timeGame;
