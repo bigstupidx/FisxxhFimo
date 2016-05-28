@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameOffline : GameMode
 {
@@ -50,7 +51,9 @@ public class GameOffline : GameMode
 
     public override void EndGame()
     {
-
+        PlayerPrefs.SetInt("fish", GameManager.Instance.fish);
+        PlayerPrefs.SetInt("trash", GameManager.Instance.trash);
+        SceneManager.LoadScene("End");
     }
 
 }

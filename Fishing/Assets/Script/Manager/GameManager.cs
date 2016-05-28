@@ -26,8 +26,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public Text txtTimer;
 
-    public int Score;
-    public int FishGoal;
+    public int fish;
+    public int trash;
 
     //Trash Spawm
     public TrashSpawn trashSpawn;

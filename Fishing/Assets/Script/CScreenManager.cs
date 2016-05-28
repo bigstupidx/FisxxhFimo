@@ -26,11 +26,6 @@ public class CScreenManager : MonoSingleton<CScreenManager> {
     void Awake()
     {
         InitDictionary();
-        if (Instance != this && Instance != null)
-        {
-            Destroy(Instance.gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
     }
 	// Use this for initialization
 	void Start () {

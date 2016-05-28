@@ -111,6 +111,7 @@ public class Hook : MonoBehaviour
                     {
                         // TODO: cuu 1 con ca, set isFreeze = false;
                         GameManager.Instance.gameMode.RemoveTrash(Fish);
+                        GameManager.Instance.trash ++;
                     }
                     else
                     {
@@ -120,6 +121,7 @@ public class Hook : MonoBehaviour
                         //{
                         //    Fish.GetComponent<Move2>().enabled = true;
                         //}
+                        GameManager.Instance.fish ++;
                     }
                     //Fish.GetComponent<Move2>().FishInf.Status = 2;
                     Fish.SetActive(false);

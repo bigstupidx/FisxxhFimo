@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class CButtonSinglePlay : CBaseButtonClick {
+public class CButtonSinglePlay : CBaseButtonClick
+{
 
     public override void OnClicked()
     {
