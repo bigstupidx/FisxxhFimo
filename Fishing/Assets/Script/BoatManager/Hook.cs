@@ -112,10 +112,19 @@ public class Hook : MonoBehaviour
                         // TODO: cuu 1 con ca, set isFreeze = false;
                         GameManager.Instance.gameMode.RemoveTrash(Fish);
                         GameManager.Instance.trash ++;
+
+                        GameManager.Instance.trashCountCollect++;
+                        GameManager.Instance.SetUICount();
                     }
                     else
                     {
                         GameManager.Instance.gameMode.RemoveFish(Fish.GetComponent<Move2>().FishInf, Fish);
+                        if (boatMan.isMine)
+                        {
+                            GameManager.Instance.fishCountCollect++;
+                            GameManager.Instance.SetUICount();
+                        }
+
                         //boatMan.IncreaseScore(Fish); TODO: uncomment
                         //if (Fish.GetComponent<Move2>())
                         //{

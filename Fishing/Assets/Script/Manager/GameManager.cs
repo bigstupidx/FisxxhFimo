@@ -29,6 +29,9 @@ public class GameManager : MonoSingleton<GameManager>
     public int fish;
     public int trash;
 
+    public int fishCountCollect;
+    public int trashCountCollect;
+
     //Trash Spawm
     public TrashSpawn trashSpawn;
 
@@ -46,7 +49,16 @@ public class GameManager : MonoSingleton<GameManager>
     {
         isUpdateData = false;
         trashSpawn.isSpawn = false;
+
+        fishCountCollect = 0;
+        trashCountCollect = 0;
+
         StartGame();
+    }
+
+    public void SetUICount()
+    { 
+        //
     }
 
     void StartGame()

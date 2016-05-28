@@ -127,6 +127,13 @@ public class GameMulti : GameMode {
     public override void EndGame()
     {
         base.EndGame();
+        if (GameManager.Instance.gameModeConfig == GameModeConfig.GAME_MULTI_VS)
+        {
+            if (PhotonNetwork.isMasterClient)
+            {
+                PhotonNetwork.LoadLevel("End");
+            }
+        }
         //mmmm
         if (this.gameState == GameState.GAME_RUN && PhotonNetwork.isMasterClient)
         {

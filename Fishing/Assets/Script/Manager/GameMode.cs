@@ -44,7 +44,7 @@ public class GameMode : MonoBehaviour
     public virtual void StartGame()
     {
         Debug.Log("Start game here aaa");
-        maxFishCount = 15;
+        maxFishCount = 20;
         //this.levelInfo = levelInfo;
         fishInfosDic = new Dictionary<int, FishInfo>();
         fishsDic = new Dictionary<int, GameObject>();
@@ -106,8 +106,10 @@ public class GameMode : MonoBehaviour
     {
         //Debug.Log("Count of fish = " + fishsDic.Count);
         //Fish = GameObject.Find("Fish").GetComponentsInChildren<Transform>();
-        if (fishsDic.Count < maxFishCount)
+        if (maxFishCount > 0)//fishsDic.Count < maxFishCount
         {
+            maxFishCount--;
+
             FishInfo fishInfo = new FishInfo();
             fishInfo.Id = Random.Range(1, 9999);
             fishInfo.IdFish = Random.Range(0, GameManager.Instance.fishPrefabs.Count);

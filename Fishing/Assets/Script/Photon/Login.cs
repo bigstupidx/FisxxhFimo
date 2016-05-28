@@ -7,7 +7,9 @@ public class Login : MonoSingleton<Login> {
     {
         if (PhotonNetwork.connected)
         {
-            splashImage.SetActive(false);
+            //splashImage.SetActive(false);
+            //JoinRandome();
+            Invoke("JoinRandome", 1.0f);
         }
         else {
             Connect();
@@ -44,13 +46,20 @@ public class Login : MonoSingleton<Login> {
         PhotonNetwork.CreateRoom(PhotonNetwork.playerName + UnityEngine.Random.Range(1, 9999), new RoomOptions() { maxPlayers = GameServer.MaxPlayer }, null);
     }
 
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
 
     #region Event
 
     public void OnConnectedToPhoton()
     {
         Debug.Log("Connected");
-        splashImage.SetActive(false);
+        //JoinRandome();
+        Invoke("JoinRandome", 1.5f);
+        //splashImage.SetActive(false);
     }
 
     public void OnCreatedRoom()
@@ -68,6 +77,12 @@ public class Login : MonoSingleton<Login> {
     public void OnJoinedRoom()
     {
         Debug.Log("OnJoinedRoom");
+    }
+
+    void OnLeftRoom()
+    {
+        Debug.Log("On Left Room");
+        //SceneControl.Instance.LoadScene(SceneControl.SCENE_START);
     }
 
     public void OnPhotonCreateRoomFailed()
