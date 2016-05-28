@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BoatManager : MonoSingleton<BoatManager>
+public class BoatManager : Photon.MonoBehaviour
 {
     public GameObject SwingSpot;
     public GameObject hookObj;
     public int SwingAngle;
+
+    [HideInInspector]
     public bool IsSwing;
+
+    //[HideInInspector]
     public float SwingDir;
 
     [HideInInspector]
@@ -15,13 +19,20 @@ public class BoatManager : MonoSingleton<BoatManager>
     [HideInInspector]
     public Transform[] _spots;
 
-    //[HideInInspector]
+    [HideInInspector]
     public int CurrentSpot;
+
+    [HideInInspector]
     public int newSpot;
     public Hook myHook;
+
+    [HideInInspector]
     public bool isOnline;
 
+    [HideInInspector]
     public int Score;
+
+    [HideInInspector]
     public int FishGoal;
 
     protected string boat_name;
@@ -57,12 +68,13 @@ public class BoatManager : MonoSingleton<BoatManager>
     // Update is called once per frame
     void Update()
     {
+
         if (!isMine)
         {
             return;
         }
-
         Swing();
+
     }
 
     public void CatchFish(GameObject Fish)

@@ -26,10 +26,14 @@ public class GameOffline : GameMode
 
     public override void CreateBoatPlayer()
     {
+        if (GameManager.Instance.prefabBoat != null)
+        {
+            GameObject boat = Instantiate(GameManager.Instance.prefabBoat, Vector3.zero, Quaternion.identity) as GameObject;
+            boat.GetComponent<BoatManager>().ApplyRandomeSpot();
+            SwipeDetector.Instance.boat = boat.GetComponent<BoatManager>();
+        }
         //GameObject boat = GameManagerNew.Instance.CreateBoatPlayerOffline();
-        GameObject boat = Instantiate(GameManager.Instance.prefabBoat, Vector3.zero, Quaternion.identity) as GameObject;
-        boat.GetComponent<BoatManager>().ApplyRandomeSpot();
-        SwipeDetector.Instance.boat = boat.GetComponent<BoatManager>();
+        
         //base.CreateBoatPlayer();
     }
 

@@ -23,13 +23,6 @@ public class GameManager : MonoSingleton<GameManager>
     public GameObject prefabBoatMulti;
 
     public List<GameObject> fishPrefabs;
-    //public Dictionary<string, Sprite> fishSprite;
-
-    //public Level LevelInfo;
-    //public GameObject PlayObj;
-    //public Transform FishContain;
-
-    //public Dictionary<string, GameObject> FishObjs;
 
     public Text txtTimer;
 
@@ -49,24 +42,9 @@ public class GameManager : MonoSingleton<GameManager>
     void Start()
     {
         isUpdateData = false;
-        //FishObjs = new Dictionary<string, GameObject>();
-        //fishSprite = new Dictionary<string, Sprite>();
 
-        //LoadFishObj();
         StartGame();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    //public bool CheckGameRun()
-    //{
-    //    //Debug.Log("Game State = " + gameMode.gameState);
-    //    //return gameMode.gameState == GameState.GAME_RUN;//gameMode != null &&
-    //}
 
     void StartGame()
     {
@@ -79,7 +57,7 @@ public class GameManager : MonoSingleton<GameManager>
                 break;
             case GameModeConfig.GAME_MULTI_VS:
                 //currentLV = Random.Range(0, 40);
-                //gameMode = new GameMulti();
+                gameMode = new GameMulti();
 
                 //if (PhotonNetwork.isMasterClient)
                 //{
@@ -98,6 +76,11 @@ public class GameManager : MonoSingleton<GameManager>
 
         gameMode.StartGame();
         StartCoroutine(StartGameByFrame());
+    }
+
+    public void SetGameState(GameState gameState)
+    {
+        gameMode.gameState = gameState;
     }
 
     public void DisableUIMulti()
@@ -192,13 +175,6 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
     #endregion
-
-    [ContextMenu("Load Level")]
-    public void LoadLevel(int level)
-    {
-        // int currentLv = PlayerPrefs.GetInt("PlayLevel", 0); 
-        //LevelInfo = DataLoader.Instance.ListLevels[level];
-    }
 
     public GameObject CreateFishByNameOffline(int iDFish)
     {

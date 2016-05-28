@@ -31,7 +31,7 @@ public class FishInfo
     }
 }
 
-public class Move2 : MonoBehaviour
+public class Move2 : Photon.MonoBehaviour
 {
     public FishInfo FishInf;
     public Transform[] WayPoint;
@@ -104,37 +104,37 @@ public class Move2 : MonoBehaviour
         CheckFLip();
     }
 
-    //public void StartGame(bool startGame)
-    //{
-    //    this.start_game = startGame;
-    //    photonView.RPC("OnStart", PhotonTargets.AllBufferedViaServer, new object[] { this.start_game, this.FishInf.FishInfoToString() });
-    //}
+    public void StartGame(bool startGame)
+    {
+        this.start_game = startGame;
+        photonView.RPC("OnStart", PhotonTargets.AllBufferedViaServer, new object[] { this.start_game, this.FishInf.FishInfoToString() });
+    }
 
-    //[PunRPC]
-    //public void OnStart(bool startGame, string fishInfo)
-    //{
-    //    //Debug.Log("Move2 show info = " + fishInfo + "  -  start game= " + startGame);
-    //    this.FishInf = FishInfo.ToFishInfo(fishInfo);
-    //    this.start_game = startGame;
-    //}
+    [PunRPC]
+    public void OnStart(bool startGame, string fishInfo)
+    {
+        //Debug.Log("Move2 show info = " + fishInfo + "  -  start game= " + startGame);
+        this.FishInf = FishInfo.ToFishInfo(fishInfo);
+        this.start_game = startGame;
+    }
 
-    //public void CatchByBoat(int boatViewID)
-    //{
-    //    photonView.RPC("OnCatch", PhotonTargets.AllBufferedViaServer, new object[] { boatViewID });
-    //}
+    public void CatchByBoat(int boatViewID)
+    {
+        photonView.RPC("OnCatch", PhotonTargets.AllBufferedViaServer, new object[] { boatViewID });
+    }
 
-    //[PunRPC]
-    //protected void OnCatch(int viewID)
-    //{
-    //    //Debug.Log("OnCatch fish id = " + photonView.viewID + " by boat id = " + viewID);
-    //    PhotonView boatView = PhotonView.Find(viewID);
-    //    if (boatView != null)
-    //    {
-    //        isCatch = true;
-    //        boatView.GetComponent<BoatManager>().CatchFish(this.gameObject);
-    //        //Debug.Log("Catch by " + boatView.name);
-    //    }
-    //}
+    [PunRPC]
+    protected void OnCatch(int viewID)
+    {
+        //Debug.Log("OnCatch fish id = " + photonView.viewID + " by boat id = " + viewID);
+        PhotonView boatView = PhotonView.Find(viewID);
+        if (boatView != null)
+        {
+            isCatch = true;
+            boatView.GetComponent<BoatManager>().CatchFish(this.gameObject);
+            //Debug.Log("Catch by " + boatView.name);
+        }
+    }
 
     void CheckFLip()
     {

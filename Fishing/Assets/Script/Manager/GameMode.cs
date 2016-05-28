@@ -2,6 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum GameState
+{
+    GAME_READY = 0,
+    GAME_WAITING = 1,
+    GAME_START = 2,
+    GAME_RUN = 3,
+    GAME_FINISH = 4
+}
+
 public enum GameModeConfig
 {
     GAME_OFFLINE = 1,
@@ -10,14 +19,13 @@ public enum GameModeConfig
 
 public class GameMode : MonoBehaviour
 {
-    //public GameState gameState;
+    public GameState gameState;
     public GameObject prefabBoat;   
 
     const float TIME_UPDATE_FISH = 0.1f;
     public float timeGame;
 
     public int maxFishCount;
-    public Level levelInfo;
 
     public Dictionary<int, FishInfo> fishInfosDic;
     public Dictionary<int, GameObject> fishsDic;
