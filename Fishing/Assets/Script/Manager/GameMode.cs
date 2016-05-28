@@ -5,8 +5,7 @@ using System.Collections.Generic;
 public enum GameModeConfig
 {
     GAME_OFFLINE = 1,
-    GAME_MULTI_VS = 2,
-    GAME_MULTI_COOP = 3
+    GAME_MULTI_VS = 2
 }
 
 public class GameMode : MonoBehaviour
@@ -86,9 +85,9 @@ public class GameMode : MonoBehaviour
         {
             FishInfo fishInfo = new FishInfo();
             fishInfo.Id = Random.Range(1, 9999);
-            fishInfo.IdFish = Random.Range(0, levelInfo.FishList.Count);
+            fishInfo.IdFish = Random.Range(0, GameManager.Instance.fishPrefabs.Count);
             fishInfo.Status = 0;
-            fishInfo.NameFish = levelInfo.FishList[fishInfo.IdFish];
+            fishInfo.NameFish = GameManager.Instance.fishPrefabs[fishInfo.IdFish].name;//levelInfo.FishList[fishInfo.IdFish];
             fishInfo.IdPath = RandomePath(fishInfo.NameFish);
             //GameManagerNew.Instance.FishObjs[fishInfo.NameFish]
             CreateFish(fishInfo);

@@ -15,7 +15,7 @@ public class GameOffline : GameMode
     public override void CreateFish(FishInfo fishInfo)
     {
         //base.CreateFish(fishInfo);
-        GameObject fish = GameManager.Instance.CreateFishByNameOffline(fishInfo.NameFish);
+        GameObject fish = GameManager.Instance.CreateFishByNameOffline(fishInfo.IdFish);
 
         fish.transform.SetParent(this.fishContainer);
         Move2 move2 = fish.GetComponent<Move2>();
@@ -27,7 +27,7 @@ public class GameOffline : GameMode
     public override void CreateBoatPlayer()
     {
         //GameObject boat = GameManagerNew.Instance.CreateBoatPlayerOffline();
-        GameObject boat = Instantiate(this.prefabBoat, Vector3.zero, Quaternion.identity) as GameObject;
+        GameObject boat = Instantiate(GameManager.Instance.prefabBoat, Vector3.zero, Quaternion.identity) as GameObject;
         //boat.GetComponent<BoatManager>().ApplyRandomeSpot();
         SwipeDetector.Instance.boat = boat.GetComponent<BoatManager>();
         //base.CreateBoatPlayer();

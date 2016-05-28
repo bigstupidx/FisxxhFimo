@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using Random = UnityEngine.Random;
 
 [System.Serializable]
-public class Level
+public class    Level
 {
     public int Lv;
     public int GoldGoal;
