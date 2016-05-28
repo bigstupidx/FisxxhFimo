@@ -148,4 +148,9 @@ public class Move2 : MonoBehaviour
             transform.localScale = new Vector2(-_someScale, transform.localScale.y);
         }
     }
+
+    public void RandomPath()
+    {
+        
+    }
 }
