@@ -46,7 +46,9 @@ public class Trash : MonoBehaviour
         Debug.LogError(col.tag);
         if (col.tag == "Fish")
         {
+            GameManager.Instance.gameMode.AddFishFreezee(col.gameObject);
             // TODO: set isFreeze = true;
+            //col.gameObject.GetComponent<Move2>().isFreeze = true;
         }
     }
 

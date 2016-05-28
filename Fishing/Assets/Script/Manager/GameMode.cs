@@ -29,6 +29,10 @@ public class GameMode : MonoBehaviour
 
     public Dictionary<int, FishInfo> fishInfosDic;
     public Dictionary<int, GameObject> fishsDic;
+    public Dictionary<int, GameObject> fishDies;
+
+    public Dictionary<int, GameObject> trashsDic;
+    public List<GameObject> trashs;
 
     public Transform fishContainer;
     public BoatManager[] listPlayer;
@@ -44,6 +48,9 @@ public class GameMode : MonoBehaviour
         //this.levelInfo = levelInfo;
         fishInfosDic = new Dictionary<int, FishInfo>();
         fishsDic = new Dictionary<int, GameObject>();
+
+        trashs = new List<GameObject>();
+        fishDies = new Dictionary<int, GameObject>();
         timeGame = 60;
         catchFish = true;
         //fishContainer = GameManager.Instance.FishContain;
@@ -141,4 +148,68 @@ public class GameMode : MonoBehaviour
     {
 
     }
+
+    public void AddFishFreezee(GameObject fish)
+    {
+        if (fishsDic.ContainsValue(fish))
+        {
+            fish.GetComponent<Move2>().isFreeze = true;
+            fishDies.Add(fish.GetComponent<Move2>().FishInf.Id, fish);
+            fishsDic.Remove(fish.GetComponent<Move2>().FishInf.Id);
+        }
+        //fishsDic.Add fish.GetComponent<Move2>().FishInf.Id
+    }
+
+    public void RemoveTrash(GameObject trash)
+    {
+        trashs.Remove(trash);
+
+        int randFishHoiSinh = Random.Range(0, fishDies.Count);
+
+        int i = 0;
+        foreach (KeyValuePair<int, GameObject> pair in fishDies)
+        {
+            if (i == randFishHoiSinh)
+            {
+                //fish Die
+                GameObject fish = pair.Value;
+                fish.GetComponent<Move2>().isFreeze = false;
+                fishDies.Remove(pair.Key);
+
+                fishsDic.Add(pair.Key, pair.Value);
+                return;
+            }
+            else
+            {
+                i++;
+            }
+        }
+    }
+
+    public void AddTrash(GameObject trash)
+    {
+        trashs.Add(trash);
+
+        //Remove 1 fish.
+        int randFishDie = Random.Range(0, fishsDic.Count);
+
+        int i = 0;
+        foreach (KeyValuePair<int, GameObject> pair in fishsDic)
+        {
+            if (i == randFishDie)
+            {
+                //fish Die
+                GameObject fish = pair.Value;
+                fish.GetComponent<Move2>().isFreeze = true;
+                fishsDic.Remove(pair.Key);
+
+                fishDies.Add(pair.Key, pair.Value);
+                return;
+            }
+            else {
+                i++; 
+            }
+        }
+    }
+
 }

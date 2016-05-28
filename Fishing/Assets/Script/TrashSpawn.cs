@@ -52,7 +52,8 @@ public class TrashSpawn : MonoBehaviour
             if (trashContainer.childCount < 20)
             {
                 InstantTrash();
-                //kill fish
+                //kill fish4
+                
             }
         }
     }
@@ -65,6 +66,9 @@ public class TrashSpawn : MonoBehaviour
         go.transform.SetParent(trashContainer);
         Vector3 pos = new Vector3(Random.Range(-8f, 8f), Random.Range(0f, -5f));
         TrashMove(go, pos);
+
+        //Kill fish
+        GameManager.Instance.gameMode.AddTrash(go);
     }
 
     public void TrashMove(GameObject trash, Vector3 pos)

@@ -110,9 +110,11 @@ public class Hook : MonoBehaviour
                     if (Fish.tag == "Trash")
                     {
                         // TODO: cuu 1 con ca, set isFreeze = false;
+                        GameManager.Instance.gameMode.RemoveTrash(Fish);
                     }
                     else
                     {
+                        GameManager.Instance.gameMode.RemoveFish(Fish.GetComponent<Move2>().FishInf, Fish);
                         //boatMan.IncreaseScore(Fish); TODO: uncomment
                         //if (Fish.GetComponent<Move2>())
                         //{
