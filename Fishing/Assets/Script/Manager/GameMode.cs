@@ -44,7 +44,7 @@ public class GameMode : MonoBehaviour
         fishInfosDic = new Dictionary<int, FishInfo>();
         fishsDic = new Dictionary<int, GameObject>();
         timeGame = 60;
-        catchFish = false;
+        catchFish = true;
         //fishContainer = GameManager.Instance.FishContain;
 
         //prefabBoat = GameManager.Instance.prefabBoat;

@@ -77,13 +77,14 @@ public class Hook : MonoBehaviour
                 if (Fish.tag == "Fish")
                 {
                     CalculateFishPos();// TODO: uncomment
-                    Fish.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    //Fish.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                     GetComponent<BoxCollider2D>().enabled = false;
                 }
                 else if (Fish.tag == "Trash")
                 {
                     CalculateFishPos();// TODO: uncomment
-                    Fish.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    Debug.Log("Catch Trash");
+                    //Fish.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                     GetComponent<BoxCollider2D>().enabled = false;
                 }
                 else
@@ -187,7 +188,7 @@ public class Hook : MonoBehaviour
 
         if (other.tag == "Trash")
         {
-            CatchTrash(other.gameObject);
+            boatMan.CatchTrash(other.gameObject);
         }
 
         //play sound
@@ -224,6 +225,7 @@ public class Hook : MonoBehaviour
         Fish = trashObj;
         Fish.transform.localScale = new Vector3(Mathf.Abs(Fish.transform.localScale.x), Fish.transform.localScale.y);
         Fish.transform.right = Root.transform.up;
+        trashObj.GetComponent<Trash>().enabled = false;
     }
 
     void DrawLine()

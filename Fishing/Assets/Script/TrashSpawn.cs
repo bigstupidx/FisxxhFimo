@@ -72,6 +72,6 @@ public class TrashSpawn : MonoBehaviour
         MovingTrash movingTrash = trash.GetComponent<MovingTrash>();
         HOTween.To(trash.transform, 3f, new TweenParms()
             .Prop("position", pos)
-            .OnComplete(movingTrash.Shake));
+            /*.OnComplete(movingTrash.Shake)*/);
     }
 }

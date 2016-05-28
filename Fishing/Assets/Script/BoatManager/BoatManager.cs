@@ -83,6 +83,12 @@ public class BoatManager : Photon.MonoBehaviour
         myHook.CatchFish(Fish);
     }
 
+    public void CatchTrash(GameObject Trash)
+    {
+        Debug.Log("My hook in Boat Manager");
+        myHook.CatchTrash(Trash);
+    }
+
     // Swing the worm hook.
     public void Swing()
     {
