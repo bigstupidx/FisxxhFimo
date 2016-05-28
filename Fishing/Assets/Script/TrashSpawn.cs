@@ -22,6 +22,10 @@ public class TrashSpawn : MonoBehaviour
 	    {
 	        isSpawn = true;
 	    }
+	    else
+	    {
+	        isSpawn = false;
+	    }
 	    delay = 0.3f;
 	    trashList = new Dictionary<string, GameObject>();
 	    trashList = trash.ToDictionary(x => x.name, x => x);
