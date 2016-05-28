@@ -61,7 +61,7 @@ public class TrashSpawn : Photon.MonoBehaviour
         }
         else
         {
-            delay = 3f;
+            delay = 5f;
             if (trashContainer.childCount < 20)
             {
                 InstantTrash();
@@ -92,9 +92,7 @@ public class TrashSpawn : Photon.MonoBehaviour
         }
 
        
-        
-        
-
+       
 
         //Kill fish
         GameManager.Instance.gameMode.AddTrash(go);

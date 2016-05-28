@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -84,6 +85,7 @@ public class GameMode : MonoBehaviour
         {
             catchFish = true;
         }
+        GameObject.Find("TimeClock").GetComponent<Text>().text = ((int) timeGame).ToString();
     }
 
     public virtual void EndGame()

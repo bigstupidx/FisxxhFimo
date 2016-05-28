@@ -16,7 +16,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public Transform[] Spots;
 
-   // [HideInInspector]
+    // [HideInInspector]
     public int[] listSpots;
 
     public GameObject prefabBoat;
@@ -52,13 +52,14 @@ public class GameManager : MonoSingleton<GameManager>
 
         fishCountCollect = 0;
         trashCountCollect = 0;
-
+        
         StartGame();
     }
 
     public void SetUICount()
-    { 
-        //
+    {
+        GameObject.Find("FishScore").GetComponent<Text>().text = fishCountCollect.ToString();
+        GameObject.Find("TrashScore").GetComponent<Text>().text = trashCountCollect.ToString();
     }
 
     void StartGame()
@@ -91,6 +92,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         gameMode.StartGame();
         StartCoroutine(StartGameByFrame());
+        SetUICount();
     }
 
     public void SetGameState(GameState gameState)

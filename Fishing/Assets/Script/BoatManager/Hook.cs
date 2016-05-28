@@ -140,6 +140,7 @@ public class Hook : MonoBehaviour
                 Fish = null;
                 //GetComponent<BoxCollider2D>().enabled = true;
                 Speed = 4 + SpeedBonus;
+                GameManager.Instance.SetUICount();
                 Audio.Instance.StopEffect();
             }
         }

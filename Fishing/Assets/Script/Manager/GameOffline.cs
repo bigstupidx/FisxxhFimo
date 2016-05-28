@@ -51,8 +51,8 @@ public class GameOffline : GameMode
 
     public override void EndGame()
     {
-        PlayerPrefs.SetInt("fish", GameManager.Instance.fish);
-        PlayerPrefs.SetInt("trash", GameManager.Instance.trash);
+        PlayerPrefs.SetInt("fish", GameManager.Instance.fishCountCollect);
+        PlayerPrefs.SetInt("trash", GameManager.Instance.trashCountCollect);
         SceneManager.LoadScene("End");
     }
 

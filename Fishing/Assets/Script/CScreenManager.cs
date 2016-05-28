@@ -29,7 +29,7 @@ public class CScreenManager : MonoSingleton<CScreenManager> {
     }
 	// Use this for initialization
 	void Start () {
-        ShowScreenByType(eScreenType.MENU);
+        //ShowScreenByType(eScreenType.MENU);
 	}
     public void InitDictionary()
     {
